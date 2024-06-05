@@ -1,27 +1,17 @@
-//Express App Setup
+// Load environment variables from .env file
+require('dotenv').config();
+
+// Importing neccessary modules
 const express = require('express');
+const morgan = require('morgan'); // HTTP request logger middleware
+const bodyParser = require('body-parser'); // Body parsing middleware
+const connectDB = require('./config/db'); // Database connection function
+
+// Creating an instance of Express
 const app = express();
-const cors = require('cors');
 
-//Middleware
-app.use(express.json());  //Parse JSON bodies
-app.use(cors());    //Enable Cross-Origin Resource Sharing
+// Connect to the database
+connectDB();
 
-//Import routes
-const authRoutes = require('./routes/authRoutes');
-const recipeRoutes = require('./routes/recipeRoutes');
-const reviewRoutes = require('./routes/reviewRoutes');
-const { error } = require('console');
-
-//use routes
-app.use('/api/auth', authRoutes);
-app.use('/api/recipes', recipeRoutes);
-app.use('api/recipes/:recipeId/reviews', reviewRoutes)
-
-//Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-
+// Exporting the app module
 module.exports = app;
