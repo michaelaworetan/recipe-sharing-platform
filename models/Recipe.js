@@ -6,33 +6,33 @@ const mongoose = require('mongoose');
 const recipeSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true, // Title field is required
+        required: true // Title field is required
     },
     ingredients: {
         type: [String], // Ingredients field is an array of strings
-        required: true, // Ingredients field is required
+        required: true // Ingredients field is required
     },
     instructions: {
         type: String,
-        required: true, // Instructions field is required
+        required: true // Instructions field is required
     },
     image: {
-        type: String, // Optional field for image URL
+        type: String // Optional field for image URL
     },
     user: {
         type: mongoose.Schema.Types.ObjectId, // Reference to the User model
         ref: 'User', // Establish a reference to the User collection
-        required: true, // User field is required
+        required: true // User field is required
     },
     ratings: [
         {
             user: {
                 type: mongoose.Schema.Types.ObjectId, // Reference to the User model for rating
-                ref: 'User', // Establish a reference to the User collection
+                ref: 'User' // Establish a reference to the User collection
             },
             rating: {
                 type: Number, // Rating is a number
-                required: true, // Rating field is required
+                required: true // Rating field is required
             },
         }
     ]
