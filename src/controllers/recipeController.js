@@ -22,15 +22,21 @@ const upload = multer({ storage: storage });
 exports.createRecipe = async (req, res) => {
     try {
         // Extract title, ingredients, and instructions from the request body
-        const { title, ingredients, instructions } = req.body;
+        const { title, ingredients, instructions, category, cuisine } = req.body;
         // Get the image file path if an image was uploaded
         const image = req.file ? req.file.path : null;
+
+        if (!title || !ingredients || !instructions || !category || !cuisine) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
 
         // Create a new Recipe instance with the provided data
         const newRecipe = new Recipe({
             title,
             ingredients,
             instructions,
+            category,
+            cuisine,
             image,
             user: req.user.id // Link the recipe to the logged-in user
         });

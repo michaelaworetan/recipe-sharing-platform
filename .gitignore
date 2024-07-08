@@ -12,3 +12,5 @@ npm-debug.log*
 
 # Ignore testing libraries
 __tests__/
+
+uploads/
