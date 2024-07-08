@@ -103,7 +103,7 @@ To create a recipe, send a POST request to /api/recipes with the following form-
 `image`: Image file of the recipe
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE.md file for details.
 
 ## Acknowledgments
 Thanks to the Node.js and Express.js communities for their excellent documentation and support.
