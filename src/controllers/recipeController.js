@@ -180,26 +180,11 @@ exports.searchRecipes = async (req, res) => {
         const { title, ingredients, category, cuisine } = req.query;
         let query = {};
 
-        // Add a title search condition to the query if a title is provided
-        if (title) {
-            query.title = { $regex: title, $options: 'i' }; // Case-insensitive regex search
-        }
-
-        // Add an ingredients search condition to the query if ingredients are provided
-        if (ingredients) {
-            query.ingredients = { $regex: ingredients, $options: 'i' }; // Case-insensitive regex search
-        }
-
-        // Add a category search condition to the query if a category is provided
-        if (category) {
-            query.category = category;
-        }
-
-        // Add a cuisine search condition to the query if a cuisine is provided
-        if (cuisine) {
-            query.cuisine = cuisine;
-        }
-
+        if (title) query.title = new RegExp(title, 'i'); // case-insensitive search
+        if (category) query.category = category;
+        if (cuisine) query.cuisine = cuisine;
+        if (ingredients) query.ingredients = new RegExp(ingredients, 'i'); // case-insensitive search
+        
         // Find recipes that match the search conditions
         const recipes = await Recipe.find(query);
         // Respond with a 200 status and the list of matching recipes

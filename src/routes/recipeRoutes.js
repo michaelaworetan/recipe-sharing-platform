@@ -26,6 +26,9 @@ const upload = multer({ storage: storage });
 // Route to create a recipe
 router.post('/', protect, upload.single('image'), createRecipe); // Protected route, handles single image upload, calls createRecipe controller
 
+// Route to search recipes
+router.get('/search', searchRecipes); // Calls searchRecipes controller
+
 // Route to get all recipes
 router.get('/', getAllRecipes); // Calls getAllRecipes controller
 
@@ -40,9 +43,6 @@ router.delete('/:id', protect, deleteRecipe); // Protected route, calls deleteRe
 
 // Route to add a review to a recipe
 router.post('/:id/reviews', protect, addReview); // Protected route, calls addReview controller with recipe ID as a parameter
-
-// Route to search recipes
-router.get('/search', searchRecipes); // Calls searchRecipes controller
 
 // Export the router to be used in other parts of the application
 module.exports = router;
