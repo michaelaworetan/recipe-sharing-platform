@@ -2,6 +2,9 @@ const express = require('express');
 const connectDB = require('./utils/db');
 const dotenv = require('dotenv');
 
+// Routes
+const authRoutes = require('./routes/authRoutes');
+
 dotenv.config();
 
 const app = express();
@@ -11,6 +14,9 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+
+//Routes
+app.use('/api/users', authRoutes);
 
 // Root endpoint for health check
 app.get('/', (req, res) => {
